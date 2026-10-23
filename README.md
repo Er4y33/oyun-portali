@@ -11,6 +11,12 @@ Web Programlama dersi haftalık uygulamaları.
   - İstemci bileşeni örneği: beğeni düğmesi (`app/components/BegeniButonu.tsx`)
   - Sayfa dili ve başlığı Türkçe
 
+- **3. Hafta:** Blog ve iç içe layout
+  - `app/blog/layout.tsx`: /blog altındaki tüm sayfalara ortak menü ve alt bilgi
+  - `app/blog/page.tsx`: tanıtım bölümü ve yazı listesi (`/blog`)
+  - `app/blog/[slug]/page.tsx`: dinamik yazı sayfası (`/blog/nextjs-layout-nedir`), olmayan yazıda 404
+  - Ana sayfaya Blog bağlantısı
+
 ## Çalıştırma
 
 ```bash

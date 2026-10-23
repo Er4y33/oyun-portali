@@ -10,9 +10,14 @@ export default function Home() {
     <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col px-6 py-16">
       <header className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">🎮 Oyun Portalı</h1>
-        <Link href="/hakkinda" className="text-sm font-medium text-indigo-600 hover:underline dark:text-indigo-400">
-          Hakkında
-        </Link>
+        <nav className="flex gap-4 text-sm font-medium text-indigo-600 dark:text-indigo-400">
+          <Link href="/blog" className="hover:underline">
+            Blog
+          </Link>
+          <Link href="/hakkinda" className="hover:underline">
+            Hakkında
+          </Link>
+        </nav>
       </header>
 
       <p className="mt-4 text-zinc-600 dark:text-zinc-400">
