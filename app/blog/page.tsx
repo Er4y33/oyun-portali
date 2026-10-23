@@ -19,26 +19,39 @@ export default function Blog() {
         </p>
       </section>
 
+      {/* BLOG YAZI ALANI */}
       <section className="mx-auto max-w-5xl px-6 pb-20">
         <div className="mb-6 flex items-baseline justify-between">
           <h2 className="text-2xl font-bold">Son Eklenen Yazılar</h2>
           <span className="text-sm text-zinc-500">Toplam {YAZILAR.length} makale</span>
         </div>
 
-        <ul className="grid gap-5 md:grid-cols-3">
+        {/* Grid yapısı: telefonda 1, tablette 2, geniş ekranda 3 sütun */}
+        <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {YAZILAR.map((yazi) => (
             <li key={yazi.slug}>
-              <Link
-                href={`/blog/${yazi.slug}`}
-                className="flex h-full flex-col rounded-2xl border border-zinc-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900"
-              >
-                <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">{yazi.kategori}</span>
-                <h3 className="mt-2 text-lg font-bold">{yazi.baslik}</h3>
-                <p className="mt-2 flex-1 text-sm text-zinc-600 dark:text-zinc-400">{yazi.ozet}</p>
-                <p className="mt-4 text-xs text-zinc-500">
-                  {tarihYaz(yazi.tarih)} · {yazi.okumaDakika} dk okuma
-                </p>
-              </Link>
+              <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
+                {/* Görsel alan: gerçek bir resim yerine renkli bir blok */}
+                <div className={`flex h-48 items-center justify-center text-6xl ${yazi.renk}`}>{yazi.simge}</div>
+
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="mb-3 flex items-center gap-2 text-xs text-zinc-500">
+                    <span className="rounded bg-zinc-100 px-2.5 py-0.5 font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                      {yazi.kategori}
+                    </span>
+                    <span>•</span>
+                    <time dateTime={yazi.tarih}>{tarihYaz(yazi.tarih)}</time>
+                  </div>
+                  <h3 className="mb-2 text-xl font-bold">{yazi.baslik}</h3>
+                  <p className="mb-4 flex-1 text-sm text-zinc-600 dark:text-zinc-400">{yazi.ozet}</p>
+                  <Link
+                    href={`/blog/${yazi.slug}`}
+                    className="text-sm font-semibold text-indigo-600 hover:underline dark:text-indigo-400"
+                  >
+                    Yazıyı Oku →
+                  </Link>
+                </div>
+              </article>
             </li>
           ))}
         </ul>

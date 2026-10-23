@@ -7,6 +7,9 @@ export interface Yazi {
   kategori: string;
   tarih: string; // YYYY-MM-DD
   okumaDakika: number;
+  /** Kartın üstündeki görsel alanın rengi (Tailwind sınıfı) ve simgesi */
+  renk: string;
+  simge: string;
 }
 
 export const YAZILAR: Yazi[] = [
@@ -22,6 +25,8 @@ export const YAZILAR: Yazi[] = [
     kategori: "CSS",
     tarih: "2026-10-23",
     okumaDakika: 3,
+    renk: "bg-sky-500",
+    simge: "🎨",
   },
   {
     slug: "nextjs-layout-nedir",
@@ -35,6 +40,8 @@ export const YAZILAR: Yazi[] = [
     kategori: "Next.js",
     tarih: "2026-10-22",
     okumaDakika: 4,
+    renk: "bg-indigo-500",
+    simge: "🧱",
   },
   {
     slug: "dosya-tabanli-yonlendirme",
@@ -48,6 +55,8 @@ export const YAZILAR: Yazi[] = [
     kategori: "Next.js",
     tarih: "2026-10-21",
     okumaDakika: 3,
+    renk: "bg-emerald-500",
+    simge: "🗂️",
   },
 ];
 

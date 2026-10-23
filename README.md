@@ -15,6 +15,8 @@ Web Programlama dersi haftalık uygulamaları.
   - `app/blog/layout.tsx`: /blog altındaki tüm sayfalara ortak menü ve alt bilgi
   - `app/blog/page.tsx`: tanıtım bölümü ve yazı listesi (`/blog`)
   - `app/blog/[slug]/page.tsx`: dinamik yazı sayfası (`/blog/nextjs-layout-nedir`), olmayan yazıda 404
+  - Yazı kartları: görsel alan, kategori etiketi, tarih (`<time>`), "Yazıyı Oku" bağlantısı; 1/2/3 sütunlu duyarlı ızgara
+  - `app/loading.tsx`: sayfa hazırlanırken gösterilen yükleniyor ekranı
   - Ana sayfaya Blog bağlantısı
 
 ## Çalıştırma
