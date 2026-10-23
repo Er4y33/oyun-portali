@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { YAZILAR, tarihYaz, yaziBul } from "@/lib/yazilar";
@@ -18,16 +19,30 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
   return { title: `${yaziBul(slug)?.baslik ?? "Yazı bulunamadı"} | Oyun Portalı` };
 }
 
-export default async function YaziSayfasi({ params }: PageProps<"/blog/[slug]">) {
-  const { slug } = await params;
-  const yazi = yaziBul(slug);
-  if (!yazi) notFound(); // olmayan yazı → 404 sayfası
-
+/**
+ * Sayfanın sabit kısmı (geri bağlantısı) hemen gösterilir. Adresten okunan bilgiye (params) bağlı içerik
+ * <Suspense> içine alınır; o hazırlanırken fallback'teki iskelet görünür. Böylece yazılar arası geçiş anında başlar.
+ */
+export default function YaziSayfasi({ params }: PageProps<"/blog/[slug]">) {
   return (
     <article className="mx-auto max-w-2xl px-6 py-16">
       <Link href="/blog" className="text-sm font-medium text-indigo-600 hover:underline dark:text-indigo-400">
         ← Tüm yazılar
       </Link>
+      <Suspense fallback={<YaziIskeleti />}>
+        <YaziIcerigi params={params} />
+      </Suspense>
+    </article>
+  );
+}
+
+async function YaziIcerigi({ params }: { params: PageProps<"/blog/[slug]">["params"] }) {
+  const { slug } = await params;
+  const yazi = yaziBul(slug);
+  if (!yazi) notFound(); // olmayan yazı → 404 sayfası
+
+  return (
+    <>
       <p className="mt-8 text-xs font-semibold text-indigo-600 dark:text-indigo-400">{yazi.kategori}</p>
       <h1 className="mt-2 text-4xl font-extrabold tracking-tight">{yazi.baslik}</h1>
       <p className="mt-3 text-sm text-zinc-500">
@@ -38,6 +53,18 @@ export default async function YaziSayfasi({ params }: PageProps<"/blog/[slug]">)
           <p key={paragraf}>{paragraf}</p>
         ))}
       </div>
-    </article>
+    </>
+  );
+}
+
+/** İçerik yüklenirken gösterilen gri iskelet */
+function YaziIskeleti() {
+  return (
+    <div className="mt-8 animate-pulse space-y-4" aria-label="Yükleniyor">
+      <div className="h-3 w-16 rounded bg-zinc-200 dark:bg-zinc-800" />
+      <div className="h-9 w-3/4 rounded bg-zinc-200 dark:bg-zinc-800" />
+      <div className="h-4 w-full rounded bg-zinc-200 dark:bg-zinc-800" />
+      <div className="h-4 w-5/6 rounded bg-zinc-200 dark:bg-zinc-800" />
+    </div>
   );
 }
