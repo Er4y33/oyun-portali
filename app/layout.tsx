@@ -19,7 +19,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
+    // suppressHydrationWarning: tarayıcı eklentileri <html> etiketine kendi özniteliklerini ekleyebiliyor
+    // (ör. crxlauncher). Bu, sunucu ve tarayıcı HTML'i arasında zararsız bir fark yaratır; uyarıyı yalnızca bu etiket için kapatır.
     <html
+      suppressHydrationWarning
       lang="tr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
